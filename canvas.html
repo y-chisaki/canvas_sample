@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>HTML5 TIPS</title>
+<!--キャンバスの背景色／枠線を指定（3）-->
+<style>
+#cv {
+  background-color: #FFF;
+  border: 1px solid black;
+}
+</style>
+
+<script src="https://frogcat.github.io/canvas-arrow/canvas-arrow.js"></script>
+<script>
+window.addEventListener('DOMContentLoaded',
+
+  function() {
+    // Canvas APIが利用できるかを判定（1）
+    if (HTMLCanvasElement) {
+
+      var mapX = 10;    // マップX座標
+      var mapY = 50;    // マップY座標
+      var mapW = 600;   // マップ幅
+      var mapH = 200;   // マップ高さ
+      var edgeW = 50;   // エッジ幅
+      var ch1disableW = 100;    // CH1無効領域幅
+      var ch2disableW = 20;
+      var ch3disableW = 100;
+      var ch4disableW = 50;
+      var ch5disableW = 100;
+      var ch6disableW = 70;
+      var ch7disableW = 100;
+      var ch8disableW = 30;
+      var ch1AlarmX = 200;    // CH1警報領域X座標
+      var ch2AlarmX = 200;
+      var ch3AlarmX = 0;
+      var ch4AlarmX = 0;
+      var ch5AlarmX = 400;
+      var ch6AlarmX = 400;
+      var ch7AlarmX = 0;
+      var ch8AlarmX = 0;
+      var ch1AlarmW = 100;    // CH1警報領域幅
+      var ch2AlarmW = 100;
+      var ch3AlarmW = 0;
+      var ch4AlarmW = 0;
+      var ch5AlarmW = 100;
+      var ch6AlarmW = 100;
+      var ch7AlarmW = 0;
+      var ch8AlarmW = 0;
+ 
+      // コンテキストオブジェクトを取得（2）
+      var cv = document.querySelector('#cv');
+
+      // 描画コンテキスト取得
+      var ctx = cv.getContext('2d');
+
+
+      // タイトル
+      var text = "距離[mm]";
+      ctx.font = "bold 20px System";
+      var textWidth = ctx.measureText( text ).width ;
+      ctx.fillText(text, ((mapX + mapW) / 2) - (textWidth / 2), 35);
+
+      // 無効領域
+      ctx.fillStyle = "rgb(127, 127, 127)";
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 0), ch1disableW, mapH / 8);
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 1), ch2disableW, mapH / 8);
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 2), ch3disableW, mapH / 8);
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 3), ch4disableW, mapH / 8);
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 4), ch5disableW, mapH / 8);
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 5), ch6disableW, mapH / 8);
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 6), ch7disableW, mapH / 8);
+      ctx.fillRect(mapX, mapY + ((mapH / 8) * 7), ch8disableW, mapH / 8);
+
+      // 警報領域
+      ctx.fillStyle = "rgb(255, 0, 0)";
+      ctx.fillRect(ch1AlarmX, mapY + ((mapH / 8) * 0), ch1AlarmW, mapH / 8);
+      ctx.fillRect(ch2AlarmX, mapY + ((mapH / 8) * 1), ch2AlarmW, mapH / 8);
+      ctx.fillRect(ch3AlarmX, mapY + ((mapH / 8) * 2), ch3AlarmW, mapH / 8);
+      ctx.fillRect(ch4AlarmX, mapY + ((mapH / 8) * 3), ch4AlarmW, mapH / 8);
+      ctx.fillRect(ch5AlarmX, mapY + ((mapH / 8) * 4), ch5AlarmW, mapH / 8);
+      ctx.fillRect(ch6AlarmX, mapY + ((mapH / 8) * 5), ch6AlarmW, mapH / 8);
+      ctx.fillRect(ch7AlarmX, mapY + ((mapH / 8) * 6), ch7AlarmW, mapH / 8);
+      ctx.fillRect(ch8AlarmX, mapY + ((mapH / 8) * 7), ch8AlarmW, mapH / 8);
+
+      // エッジ非表示
+      ctx.fillStyle = "rgb(255, 242, 204)";
+      ctx.fillRect(mapX + mapW - edgeW, mapY, edgeW, mapH);
+
+      // 塗りつぶしの四角、枠線だけの四角を描画（3）
+      ctx.strokeRect(mapX, mapY, mapW, mapH);
+
+
+      ctx.beginPath();
+      // 矢印
+      ctx.fillStyle = "rgb(0, 0, 0)";
+      ctx.arrow(110, 30, 10, 30, [0, 2, -20, 2, -20, 6]);
+      ctx.arrow(610, 30, 510, 30, [0, 2, -20, 2, -20, 6]);
+      ctx.fill();
+    }
+  }
+);
+
+
+</script>
+
+</head>
+<body>
+<!--キャンバスの準備（1）-->
+<canvas id="cv" width="620" height="300">
+  <!--Canvas機能に対応していないブラウザへの備え（2）-->
+  Canvas機能に対応したブラウザでアクセスしてください。
+</canvas>
+</body>
+</html>
